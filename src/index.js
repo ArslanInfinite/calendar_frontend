@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom' 
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom' 
 // BrowserRouter uses HTML5 API to keep track of UI with the URL. 
 // Route tells React to renders certain components when certain routes/url are reached.
 // Switch takes in all the children of Route, if it matches the route, it will stop searching for other routes
