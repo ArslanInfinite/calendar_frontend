@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Modal from 'react-modal';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom' 
 import calendarHome from './components/Home';
 // BrowserRouter uses HTML5 API to keep track of UI with the URL. 
 // Route tells React to renders certain components when certain routes/url are reached.
 // Switch takes in all the children of Route, if it matches the route, it will stop searching for other routes
 // Link helps us to not refresh the browser for every component rendered 
-
+Modal.setAppElement('#root')
 
 
 const AddTask = () => (
