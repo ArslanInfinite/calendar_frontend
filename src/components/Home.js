@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import moment from "moment";
 import Modal from 'react-modal';
-import sampleTasks from '../tasks'
+import {connect} from 'react-redux';
 import ExampleControlSlot from './ExampleControlSlot'
+import fetchTasks from '../redux/actions/fetchTasks';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const propTypes = {}
@@ -21,9 +22,10 @@ const customStyles = {
 
 const localizer = momentLocalizer(moment);
 
-const Selectable = () => {
+const CalendarHome = (
+  { fetchTasks, allTasks}
+) => {
   const [state, setState] = useState({
-    tasks: sampleTasks,
     modalIsOpen: false,
     title: '',
     description: '',
@@ -31,14 +33,11 @@ const Selectable = () => {
     startDate: '',
     endDate: ''
   });
-  const { tasks, modalIsOpen, title, description, allDay, startDate, endDate } = state;
-  /*const [tasks, setEvents] = useState(sampleTasks);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [allDay, setAllDay] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');*/
+  const { modalIsOpen, title, description, allDay, startDate, endDate } = state;
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const toggleModal = () => setState(prev => ({
     ...prev,
@@ -57,22 +56,11 @@ const Selectable = () => {
       endDate: moment(end).format('YYYY-MM-DDTHH:mm'),
       modalIsOpen: true
     }));
-    /*const title = window.prompt('New Event name')
-    if (title)
-      this.setState({
-        tasks: [
-          ...this.state.tasks,
-          {
-            start,
-            end,
-            title,
-          },
-        ],
-      })*/
   }
 
   const handleAddTask = event => {
     event.preventDefault();
+
     console.log('satte in submit==>>', state)
   }
 
@@ -122,10 +110,10 @@ const Selectable = () => {
       <Calendar
         selectable
         localizer={localizer}
-        events={tasks}
-        defaultView={Views.WEEK}
+        events={allTasks}
+        defaultView={Views.MONTH}
         scrollToTime={new Date(1970, 1, 1, 6)}
-        defaultDate={new Date(2015, 3, 12)}
+        defaultDate={new Date()}
         onSelectEvent={event => alert(event.title)}
         onSelectSlot={handleSelect}
         style={{ height: "100vh" }}
@@ -134,6 +122,10 @@ const Selectable = () => {
   )
 }
 
-Selectable.propTypes = propTypes
+CalendarHome.propTypes = propTypes
 
-export default Selectable
+const mapStateToProps = (state) => ({
+  allTasks: state.tasks
+});
+
+export default connect(mapStateToProps, { fetchTasks})(CalendarHome)
