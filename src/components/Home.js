@@ -1,69 +1,98 @@
 import React, { useState, useEffect } from 'react'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import moment from "moment";
-import Modal from 'react-modal';
+// import events from '../tasks';
 import { connect } from 'react-redux';
-import ExampleControlSlot from './ExampleControlSlot'
+import createSlot from 'react-tackle-box/Slot'
 import fetchTasks from '../redux/actions/fetchTasks';
 import createTask from '../redux/actions/createTask';
+import updateTask from '../redux/actions/updateTask';
+import CreateTaskModal from './CreateTask';
+import ViewTaskModal from './ViewTask';
+import EditTaskModal from './EditTask';
+
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+const ExampleControlSlot = createSlot();
 const propTypes = {}
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
 
 const localizer = momentLocalizer(moment);
 
 const CalendarHome = (
-  { fetchTasks, allTasks, createTask }
+  { fetchTasks, allTasks, createTask, updateTask }
 ) => {
   const [state, setState] = useState({
-    modalIsOpen: false,
+    showAddTaskModal: false,
+    showViewTaskModal: false,
+    showEditTaskModal: false,
     title: '',
     description: '',
     allDay: false,
-    startDate: '',
-    endDate: ''
+    start: '',
+    end: '',
+    currentTask: null,
+    taskToEditId: null
   });
-  const { modalIsOpen, title, description, allDay, startDate, endDate } = state;
+  const { title, description, allDay, start, end, currentTask, showViewTaskModal, taskToEditId } = state;
 
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  const toggleModal = () => setState(prev => ({
+  const toggleAddModal = () => setState(prev => ({
     ...prev,
-    modalIsOpen: !prev.modalIsOpen,
+    showAddTaskModal: !prev.showAddTaskModal,
     title: '',
     description: '',
-    startDate: '',
-    endDate: '',
+    start: '',
+    end: '',
     allDay: false
   }));
 
-  const handleSelect = ({ start, end }) => {
+  const toggleViewModal = () => setState(prev => ({
+    ...prev,
+    showViewTaskModal: !prev.showViewTaskModal,
+  }));
+
+  const toggleEditModal = (task = {}) => {
     setState(prev => ({
       ...prev,
-      startDate: moment(start).format('YYYY-MM-DDTHH:mm'),
-      endDate: moment(end).format('YYYY-MM-DDTHH:mm'),
-      modalIsOpen: true
+      ...task,
+      taskToEditId: task.id,
+      showEditTaskModal: !prev.showEditTaskModal,
+      showViewTaskModal: false,
+      start: moment(task.start).format('YYYY-MM-DDTHH:mm'),
+      end: moment(task.end).format('YYYY-MM-DDTHH:mm'),
+    }))
+  };
+
+  const handleSelectSlot = ({ start, end }) => {
+    setState(prev => ({
+      ...prev,
+      start: moment(start).format('YYYY-MM-DDTHH:mm'),
+      end: moment(end).format('YYYY-MM-DDTHH:mm'),
+      showAddTaskModal: true
+    }));
+  }
+
+  const handleSelectEvent = currentTask => {
+    setState(prev => ({
+      ...prev,
+      currentTask,
+      showViewTaskModal: true
     }));
   }
 
   const handleAddTask = event => {
     event.preventDefault();
-    createTask({ title, description, start_time: startDate, end_time: endDate, all_day: allDay });
-    toggleModal();
-    console.log('satte in submit==>>', state)
+    createTask({ title, description, start, end, all_day: allDay });
+    toggleAddModal();
+  }
+
+  const handleUpdateTask = (event) => {
+    event.preventDefault();
+    updateTask({ id: taskToEditId, title, description, start, end, all_day: allDay });
+    toggleEditModal();
   }
 
   const handleInputChange = event => {
@@ -90,24 +119,11 @@ const CalendarHome = (
           </strong>
       </ExampleControlSlot.Entry>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={toggleModal}
-        style={customStyles}
-      >
-        <button onClick={toggleModal}>close</button>
-        <h1>Add a Task</h1>
+      <CreateTaskModal state={state} handleAddTask={handleAddTask} toggleModal={toggleAddModal} handleInputChange={handleInputChange} />
 
+      {showViewTaskModal && <ViewTaskModal toggleEditModal={toggleEditModal} showViewTaskModal={showViewTaskModal} task={currentTask} toggleModal={toggleViewModal} />}
 
-        <form onSubmit={handleAddTask}>
-          Title: <input required name="title" value={title} onChange={handleInputChange} /> <br />
-            Description: <input required name="description" value={description} onChange={handleInputChange} /> <br />
-            Start Date: <input min={moment().format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="startDate" value={startDate} onChange={handleInputChange} /> <br />
-             End Date: <input min={moment(startDate).format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="endDate" value={endDate} onChange={handleInputChange} /> <br />
-              All Day: <input type="checkbox" name="allDay" value={allDay} checked={allDay} onChange={handleInputChange} /> <br />
-          <button>Create</button>
-        </form>
-      </Modal>
+      <EditTaskModal state={state} handleUpdateTask={handleUpdateTask} toggleModal={toggleEditModal} handleInputChange={handleInputChange} />
 
       <Calendar
         selectable
@@ -116,9 +132,10 @@ const CalendarHome = (
         defaultView={Views.MONTH}
         scrollToTime={new Date(1970, 1, 1, 6)}
         defaultDate={new Date()}
-        onSelectEvent={event => alert(event.title)}
-        onSelectSlot={handleSelect}
+        onSelectEvent={handleSelectEvent}
+        onSelectSlot={handleSelectSlot}
         style={{ height: "100vh" }}
+      //event => alert(event.title)
       />
     </>
   )
@@ -130,4 +147,4 @@ const mapStateToProps = (state) => ({
   allTasks: state.tasks
 });
 
-export default connect(mapStateToProps, { fetchTasks, createTask })(CalendarHome)
+export default connect(mapStateToProps, { fetchTasks, createTask, updateTask })(CalendarHome)
