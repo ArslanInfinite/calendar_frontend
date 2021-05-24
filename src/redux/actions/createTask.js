@@ -4,7 +4,7 @@ export default function createTask(newTask) {
   return async (dispatch) => {
     try {
       const resp = await fetch('http://localhost:3001/api/v1/tasks', {
-        method: 'post',
+        method: 'POST',
         body: JSON.stringify({ task: newTask }),
         headers: {
           'Content-Type': 'application/json'

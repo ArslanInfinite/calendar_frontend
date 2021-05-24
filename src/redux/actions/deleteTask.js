@@ -4,7 +4,7 @@ export default function deleteTask(taskId) {
   return async (dispatch) => {
     try {
       const resp = await fetch(`http://localhost:3001/api/v1/tasks/${taskId}`, {
-        method: 'delete'
+        method: 'DELETE'
       });
       dispatch({
         type: DELETE_TASK,
