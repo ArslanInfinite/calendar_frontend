@@ -7,6 +7,7 @@ import createSlot from 'react-tackle-box/Slot'
 import fetchTasks from '../redux/actions/fetchTasks';
 import createTask from '../redux/actions/createTask';
 import updateTask from '../redux/actions/updateTask';
+import deleteTask from '../redux/actions/deleteTask';
 import CreateTaskModal from './CreateTask';
 import ViewTaskModal from './ViewTask';
 import EditTaskModal from './EditTask';
@@ -19,7 +20,7 @@ const propTypes = {}
 const localizer = momentLocalizer(moment);
 
 const CalendarHome = (
-  { fetchTasks, allTasks, createTask, updateTask }
+  { fetchTasks, allTasks, createTask, updateTask, deleteTask }
 ) => {
   const [state, setState] = useState({
     showAddTaskModal: false,
@@ -31,9 +32,8 @@ const CalendarHome = (
     start: '',
     end: '',
     currentTask: null,
-    taskToEditId: null
   });
-  const { title, description, allDay, start, end, currentTask, showViewTaskModal, taskToEditId } = state;
+  const { title, description, allDay, start, end, currentTask, showViewTaskModal } = state;
 
   useEffect(() => {
     fetchTasks();
@@ -58,7 +58,6 @@ const CalendarHome = (
     setState(prev => ({
       ...prev,
       ...task,
-      taskToEditId: task.id,
       showEditTaskModal: !prev.showEditTaskModal,
       showViewTaskModal: false,
       start: moment(task.start).format('YYYY-MM-DDTHH:mm'),
@@ -91,8 +90,13 @@ const CalendarHome = (
 
   const handleUpdateTask = (event) => {
     event.preventDefault();
-    updateTask({ id: taskToEditId, title, description, start, end, all_day: allDay });
+    updateTask({ id: currentTask.id, title, description, start, end, all_day: allDay });
     toggleEditModal();
+  }
+
+  const handleDeleteTask = () => {
+    deleteTask(currentTask.id);
+    toggleViewModal();
   }
 
   const handleInputChange = event => {
@@ -121,7 +125,7 @@ const CalendarHome = (
 
       <CreateTaskModal state={state} handleAddTask={handleAddTask} toggleModal={toggleAddModal} handleInputChange={handleInputChange} />
 
-      {showViewTaskModal && <ViewTaskModal toggleEditModal={toggleEditModal} showViewTaskModal={showViewTaskModal} task={currentTask} toggleModal={toggleViewModal} />}
+      {showViewTaskModal && <ViewTaskModal toggleEditModal={toggleEditModal} showViewTaskModal={showViewTaskModal} task={currentTask} toggleModal={toggleViewModal} handleDeleteTask={handleDeleteTask} />}
 
       <EditTaskModal state={state} handleUpdateTask={handleUpdateTask} toggleModal={toggleEditModal} handleInputChange={handleInputChange} />
 
@@ -135,7 +139,6 @@ const CalendarHome = (
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectSlot}
         style={{ height: "100vh" }}
-      //event => alert(event.title)
       />
     </>
   )
@@ -147,4 +150,4 @@ const mapStateToProps = (state) => ({
   allTasks: state.tasks
 });
 
-export default connect(mapStateToProps, { fetchTasks, createTask, updateTask })(CalendarHome)
+export default connect(mapStateToProps, { fetchTasks, createTask, updateTask, deleteTask})(CalendarHome)

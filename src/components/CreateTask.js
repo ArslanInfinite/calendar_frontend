@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 const customStyles = {
   content: {
-    top: '10%',
+    top: '5%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
@@ -26,8 +26,8 @@ const CreateTask = ({ state, toggleModal, handleAddTask, handleInputChange }) =>
     <form onSubmit={handleAddTask}>
       Title: <input required name="title" value={title} onChange={handleInputChange} /> <br />
             Description: <input required name="description" value={description} onChange={handleInputChange} /> <br />
-            Start Date: <input min={moment().format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="start" value={start} onChange={handleInputChange} /> <br />
-             End Date: <input min={moment(start).format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="end" value={end} onChange={handleInputChange} /> <br />
+            Start Date: <input min={allDay ? moment().startOf('day').format('YYYY-MM-DDTHH:mm') : moment().format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="start" value={start} onChange={handleInputChange} /> <br />
+             End Date: <input min={allDay ? '' : moment(start).format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="end" value={end} onChange={handleInputChange} /> <br />
               All Day: <input type="checkbox" name="allDay" value={allDay} checked={allDay} onChange={handleInputChange} /> <br />
       <button>Create</button>
     </form>

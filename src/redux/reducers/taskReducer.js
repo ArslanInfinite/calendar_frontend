@@ -1,4 +1,4 @@
-import { FETCH_TASKS, CREATE_TASK, UPDATE_TASK } from './types.js'
+import { FETCH_TASKS, CREATE_TASK, UPDATE_TASK, DELETE_TASK } from './types.js'
 
 const initialState = { tasks: [], error: '' }
 
@@ -18,6 +18,8 @@ export default function taskReducer(state = initialState, action) {
       clonedTasks.splice(taskIndex, 1, updatedTask);
       return { ...state, tasks: clonedTasks}
     }
+    case DELETE_TASK:
+      return { ...state, tasks: state.tasks.filter(task => task.id !== payload) };    
     default:
       return state;
   }

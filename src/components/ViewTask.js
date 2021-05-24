@@ -12,7 +12,7 @@ const customStyles = {
   }
 };
 
-const ViewTask = ({ task, toggleModal, showViewTaskModal, toggleEditModal }) => {
+const ViewTask = ({ task, toggleModal, showViewTaskModal, toggleEditModal, handleDeleteTask }) => {
   const { title, description, allDay, end, start } = task;
 
   const handleEditTask = () => {
@@ -28,7 +28,7 @@ const ViewTask = ({ task, toggleModal, showViewTaskModal, toggleEditModal }) => 
     <h1>{title}</h1>
 
     <button onClick={handleEditTask}>Edit</button>
-    <button onClick={() => {}}>Delete</button>
+    <button onClick={handleDeleteTask}>Delete</button>
 
     <p>Description: {description}</p>
     <p>Start Date/Time: {moment(start).format('MMM DD, YYYY @ HH:mmA')}</p>
