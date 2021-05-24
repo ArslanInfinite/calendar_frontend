@@ -2,16 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom' 
+import calendarHome from './components/Home';
 // BrowserRouter uses HTML5 API to keep track of UI with the URL. 
 // Route tells React to renders certain components when certain routes/url are reached.
 // Switch takes in all the children of Route, if it matches the route, it will stop searching for other routes
 // Link helps us to not refresh the browser for every component rendered 
 
-const calendarHome = () => (
-  <div>
-    Islamic Calendar Lite - Homepage
-  </div>
-)
+
 
 const AddTask = () => (
   <div>
@@ -49,8 +46,8 @@ const routes = (
       <Header />
       <Switch>
         <Route exact path='/' component={calendarHome}/>
-        <Route exact path='/addtask' component={AddTask}/>
-        <Route exact path='/edittask' component={EditTask} />
+        <Route exact path='/add' component={AddTask}/>
+        <Route exact path='/edit' component={EditTask} />
         <Route component={PageNotFound} />
       </Switch>
     </div>
