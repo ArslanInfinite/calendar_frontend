@@ -1,4 +1,101 @@
+body{
+  margin: 0;
+    box-sizing: border-box;
+    background-image: url("https://uvislam.com/wordpress/wp-content/uploads/2014/09/al-sahaba-mosque.png"), url("https://www.pngkey.com/png/detail/1-13004_eid-mubarak-moon-png.png");
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-position: bottom left, top right;
+    background-size: 400px, 300px;
+}
+
+*,html{
+  box-sizing: border-box;
+}
+
+
+
 .ReactModal__Overlay.ReactModal__Overlay--after-open{
   z-index: 5;
-  background-color: rgba(255, 255, 255, 0) !important;
+  background-color: rgba(0, 0, 0, 0.377) !important;
+}
+
+.form-group{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group label{
+  width: 90px;
+}
+
+.ml-0{
+  margin-left: 0 !important;
+}
+
+.rbc-calendar{
+  height: 535px;
+  max-width: 850px;
+  width: 100%;
+  margin: 10px auto 0 auto;
+  background-color: rgba(255, 255, 255, 0.863);
+}
+
+header{
+  text-align: center;
+}
+
+header nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header nav a{
+  margin: 0 10px;
+  text-decoration: none;
+  color: white;
+  background-color: #2a2c41;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+header > h1{
+  padding: 10px 0;
+  margin: 0;
+}
+
+.rbc-row.rbc-month-header{
+    background-color: #2a2c41;
+}
+
+.rbc-header{
+  padding: 10px 0;
+}
+
+.rbc-day-bg + .rbc-day-bg, .rbc-header + .rbc-header{
+  border-left: 1px solid gold !important;
+}
+
+.rbc-month-row + .rbc-month-row{
+    border-top: 1px solid gold !important;
+}
+
+.rbc-month-view{
+  border: 1px solid gold;
+}
+
+.rbc-header span{
+  color: white;
+}
+
+.quran-wrapper{
+  max-width: 600px;
+  width: 100%;
+  margin: 60px auto 0 auto;
+  text-align: center;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1.5px solid #2a2c41;
+  background-color: rgba(255, 255, 255, 0.863);
 }

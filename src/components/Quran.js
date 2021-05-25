@@ -34,17 +34,19 @@ const Quran = () => {
     } catch (err) {
       console.log('an error occurred==>>', err);
     }
-  }  
+  }
 
-  return (<div>
-    <h1>Quran Page</h1>
+  return (
+    <div className="quran-wrapper">
+      <h1>Quran Page</h1>
 
-    <p>{arText}</p>
-    <p>{enText}</p>
-    <p>{surahAndAyah}</p>
+      <p>{arText}</p>
+      <p>{enText}</p>
+      <p>{surahAndAyah}</p>
 
-    <button onClick={getQuote}>Get New Verse</button>
-  </div>)
+      <button onClick={getQuote}>Get New Verse</button>
+    </div>
+    )
 }
 
 export default Quran;

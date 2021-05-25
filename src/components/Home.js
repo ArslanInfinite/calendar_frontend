@@ -135,17 +135,18 @@ const CalendarHome = ( { fetchTasks, allTasks, createTask, updateTask, deleteTas
 
       <EditTaskModal state={state} handleUpdateTask={handleUpdateTask} toggleModal={toggleEditModal} handleInputChange={handleInputChange} />
 
-      <Calendar
-        selectable
-        localizer={localizer}
-        events={allTasks}
-        defaultView={Views.MONTH}
-        scrollToTime={new Date(1970, 1, 1, 6)}
-        defaultDate={new Date()}
-        onSelectEvent={handleSelectEvent}
-        onSelectSlot={handleSelectSlot}
-        style={{ height: "100vh" }}
-      />
+
+        <Calendar
+          selectable
+          localizer={localizer}
+          events={allTasks}
+          defaultView={Views.MONTH}
+          scrollToTime={new Date(1970, 1, 1, 6)}
+          defaultDate={new Date()}
+          onSelectEvent={handleSelectEvent}
+          onSelectSlot={handleSelectSlot}
+        />
+
     </>
   )
 }

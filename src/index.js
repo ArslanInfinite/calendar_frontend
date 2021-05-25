@@ -35,11 +35,11 @@ const PageNotFound = () => (
 const Header = () => (
   <header>
     <h1>Homepage</h1>
-    <Link to='/'>Homepage</Link>
-    <Link to='/add'>Add Task</Link>
-    <Link to='/edit'>Edit Task</Link>
-    <Link to='/about'>About</Link>
-    <Link to='/quran'>Quran Verses</Link>
+    <nav>
+      <Link to='/'>Homepage</Link>
+      <Link to='/about'>About</Link>
+      <Link to='/quran'>Quran Verses</Link>
+    </nav>
   </header>
 )
 
