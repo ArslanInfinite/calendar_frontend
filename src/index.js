@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 import calendarHome from './components/Home';
+import About from './components/About';
 import { store } from './redux/store/store';
 import "./index.css";
 // BrowserRouter uses HTML5 API to keep track of UI with the URL. 
@@ -11,7 +12,6 @@ import "./index.css";
 // Switch takes in all the children of Route, if it matches the route, it will stop searching for other routes
 // Link helps us to not refresh the browser for every component rendered 
 Modal.setAppElement('#root')
-
 
 const AddTask = () => (
   <div>
@@ -37,6 +37,7 @@ const Header = () => (
     <Link to='/'>Homepage</Link>
     <Link to='/add'>Add Task</Link>
     <Link to='/edit'>Edit Task</Link>
+    <Link to='/about'>About</Link>
   </header>
 )
 
@@ -52,6 +53,7 @@ const routes = (
           <Route exact path='/' component={calendarHome} />
           <Route exact path='/add' component={AddTask} />
           <Route exact path='/edit' component={EditTask} />
+          <Route exact path="/about" component={About} />
           <Route component={PageNotFound} />
         </Switch>
       </div>
@@ -59,5 +61,4 @@ const routes = (
   </Provider>
 )
 
-ReactDOM.render(routes, document.getElementById('root')
-); 
+ReactDOM.render(routes, document.getElementById('root')); 
