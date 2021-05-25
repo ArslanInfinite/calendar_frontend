@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
+// using this library for calendar, best one available
 import moment from "moment";
-// import events from '../tasks';
+// moment is needed for date and time manipulation for JS
 import { connect } from 'react-redux';
 import createSlot from 'react-tackle-box/Slot'
+// dependency of react-b-c, needed to create slots 
 import fetchTasks from '../redux/actions/fetchTasks';
 import createTask from '../redux/actions/createTask';
 import updateTask from '../redux/actions/updateTask';
@@ -11,17 +13,17 @@ import deleteTask from '../redux/actions/deleteTask';
 import CreateTaskModal from './CreateTask';
 import ViewTaskModal from './ViewTask';
 import EditTaskModal from './EditTask';
+// Modal is a popup feature in most calendars, seemed to be the best way for user interaction with these types of apps
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const ExampleControlSlot = createSlot();
-const propTypes = {}
+// same dependency for createSlot
 
 const localizer = momentLocalizer(moment);
+// requirement of react-big-cal ibrary to use this 
 
-const CalendarHome = (
-  { fetchTasks, allTasks, createTask, updateTask, deleteTask }
-) => {
+const CalendarHome = ( { fetchTasks, allTasks, createTask, updateTask, deleteTask } ) => {
   const [state, setState] = useState({
     showAddTaskModal: false,
     showViewTaskModal: false,
@@ -33,11 +35,14 @@ const CalendarHome = (
     end: '',
     currentTask: null,
   });
+
   const { title, description, allDay, start, end, currentTask, showViewTaskModal } = state;
+  // destructuring the object for easier access
 
   useEffect(() => {
     fetchTasks();
   }, []);
+  // when component mounts we are fetching tasks from the backend
 
   const toggleAddModal = () => setState(prev => ({
     ...prev,
@@ -48,6 +53,7 @@ const CalendarHome = (
     end: '',
     allDay: false
   }));
+  // toggle the state of the add modal 
 
   const toggleViewModal = () => setState(prev => ({
     ...prev,
@@ -143,8 +149,6 @@ const CalendarHome = (
     </>
   )
 }
-
-CalendarHome.propTypes = propTypes
 
 const mapStateToProps = (state) => ({
   allTasks: state.tasks

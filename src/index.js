@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 import calendarHome from './components/Home';
 import About from './components/About';
+import Quran from './components/Quran';
 import { store } from './redux/store/store';
 import "./index.css";
 // BrowserRouter uses HTML5 API to keep track of UI with the URL. 
@@ -38,6 +39,7 @@ const Header = () => (
     <Link to='/add'>Add Task</Link>
     <Link to='/edit'>Edit Task</Link>
     <Link to='/about'>About</Link>
+    <Link to='/quran'>Quran Verses</Link>
   </header>
 )
 
@@ -54,6 +56,7 @@ const routes = (
           <Route exact path='/add' component={AddTask} />
           <Route exact path='/edit' component={EditTask} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/quran" component={Quran} />
           <Route component={PageNotFound} />
         </Switch>
       </div>

@@ -9,6 +9,7 @@
     "cldr": "^7.0.0",
     "globalize": "^1.6.0",
     "moment": "^2.29.1",
+    "noble-quran": "https://github.com/Yusadolat/noble-quran",
     "react": "^17.0.2",
     "react-big-calendar": "^0.33.3",
     "react-dom": "^17.0.2",
