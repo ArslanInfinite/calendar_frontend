@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
-import calendarHome from './components/Home';
+import CalendarHome from './components/CalendarHome';
 import About from './components/About';
-import Quran from './components/Quran';
+import Quran from './components/QuranFetch';
 import { store } from './redux/store/store';
 import "./index.css";
 // BrowserRouter uses HTML5 API to keep track of UI with the URL. 
@@ -34,7 +34,7 @@ const PageNotFound = () => (
 
 const Header = () => (
   <header>
-    <h1>Homepage</h1>
+    <h1>Islamic Calendar - Lite</h1>
     <nav>
       <Link to='/'>Homepage</Link>
       <Link to='/about'>About</Link>
@@ -52,7 +52,7 @@ const routes = (
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' component={calendarHome} />
+          <Route exact path='/' component={CalendarHome} />
           <Route exact path='/add' component={AddTask} />
           <Route exact path='/edit' component={EditTask} />
           <Route exact path="/about" component={About} />

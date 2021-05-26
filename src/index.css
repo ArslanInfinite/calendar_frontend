@@ -12,8 +12,6 @@ body{
   box-sizing: border-box;
 }
 
-
-
 .ReactModal__Overlay.ReactModal__Overlay--after-open{
   z-index: 5;
   background-color: rgba(0, 0, 0, 0.377) !important;
@@ -96,6 +94,34 @@ header > h1{
   text-align: center;
   border-radius: 12px;
   padding: 20px;
-  border: 1.5px solid #2a2c41;
-  background-color: rgba(255, 255, 255, 0.863);
+  border: 1.5px solid gold;
+  background-color: #2a2c41ea;
+}
+
+.about-wrapper{
+  max-width: 600px;
+  width: 100%;
+  margin: 60px auto 0 auto;
+  text-align: center;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1.5px solid gold;
+  background-color: #2a2c41ea;
+}
+
+.arabic-text{
+  color:gold;
+}
+
+.quran-wrapper h1{
+  text-decoration: underline;
+  color: white
+}
+
+.about-wrapper h1{
+    color: white
+}
+
+.quran-wrapper p:not(.arabic-text){
+  color: white;
 }

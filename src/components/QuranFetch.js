@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import QuranRender from './QuranRender';
 
 const Quran = () => {
   const [state, setState] = useState({
@@ -36,16 +36,10 @@ const Quran = () => {
     }
   }
 
+
+
   return (
-    <div className="quran-wrapper">
-      <h1>Quran Page</h1>
-
-      <p>{arText}</p>
-      <p>{enText}</p>
-      <p>{surahAndAyah}</p>
-
-      <button onClick={getQuote}>Get New Verse</button>
-    </div>
+    <QuranRender quranData={state} getQuote={getQuote} />
     )
 }
 

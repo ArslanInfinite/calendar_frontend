@@ -3,12 +3,12 @@ import Modal from 'react-modal';
 
 const customStyles = {
   content: {
+    top: '48%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    top: '48%',
     borderRadius: "12px"
   }
 };
@@ -22,7 +22,6 @@ const CreateTask = ({ state, toggleModal, handleAddTask, handleInputChange }) =>
   >
     <button onClick={toggleModal}>close</button>
     <h1>Add a Task</h1>
-
 
     <form onSubmit={handleAddTask}>
       <div className="form-group">

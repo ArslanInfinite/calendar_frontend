@@ -3,12 +3,13 @@ import Modal from 'react-modal';
 
 const customStyles = {
   content: {
-    top: '10%',
+    top: '48%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
+    borderRadius: "12px"
   }
 };
 
@@ -22,13 +23,28 @@ const CreateTask = ({ state, toggleModal, handleUpdateTask, handleInputChange })
     <button onClick={toggleModal}>close</button>
     <h1>Edit a Task</h1>
 
-
     <form onSubmit={handleUpdateTask}>
-      Title: <input required name="title" value={title} onChange={handleInputChange} /> <br />
-            Description: <input required name="description" value={description} onChange={handleInputChange} /> <br />
-            Start Date: <input min={moment().format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="start" value={start} onChange={handleInputChange} /> <br />
-             End Date: <input min={moment(start).format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="end" value={end} onChange={handleInputChange} /> <br />
-              All Day: <input type="checkbox" name="allDay" value={allDay} checked={allDay} onChange={handleInputChange} /> <br />
+      <div className="form-group">
+        <label>Title:</label>
+        <input required name="title" value={title} onChange={handleInputChange} /> 
+      </div>
+      <div className="form-group">
+        <label>Description:</label>
+        <input required name="description" value={description} onChange={handleInputChange} />       
+        </div>
+      <div className="form-group">
+        <label>Start Date:</label>
+            <input min={moment().format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="start" value={start} onChange={handleInputChange} /> 
+      </div>
+      < div className="form-group">
+        <label>End Date:</label>
+          <input min={moment(start).format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="end" value={end} onChange={handleInputChange} /> 
+          </div>
+          <div className="form-group">
+            <label>All Day:</label>
+            <input type="checkbox" name="allDay" value={allDay} checked={allDay} onChange={handleInputChange} /> 
+            <br />
+          </div>
       <button>Update</button>
     </form>
   </Modal>)
