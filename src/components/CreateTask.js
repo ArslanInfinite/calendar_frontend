@@ -13,14 +13,14 @@ const customStyles = {
   }
 };
 
-const CreateTask = ({ state, toggleModal, handleAddTask, handleInputChange }) => {
+const CreateTask = ({ state, toggleAddModal, handleAddTask, handleInputChange }) => {
   const { title, description, allDay, start, end, showAddTaskModal } = state;
   return (<Modal
     isOpen={showAddTaskModal}
-    onRequestClose={toggleModal}
+    onRequestClose={toggleAddModal}
     style={customStyles}
   >
-    <button onClick={toggleModal}>close</button>
+    <button onClick={toggleAddModal}>close</button>
     <h1>Add a Task</h1>
 
     <form onSubmit={handleAddTask}>
@@ -42,7 +42,7 @@ const CreateTask = ({ state, toggleModal, handleAddTask, handleInputChange }) =>
       </div>
       <div className="form-group">
         <label>All Day:</label>
-        <input type="checkbox" name="allDay" className="ml-0" value={allDay} checked={allDay} onChange={handleInputChange} /> <br />
+        <input type="checkbox" name="allDay" className="ml-0" checked={allDay} onChange={handleInputChange} /> <br />
       </div>
       <button>Create</button>
     </form>

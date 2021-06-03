@@ -5,7 +5,7 @@ export default function QuranRender(props) {
   const {arText, enText, surahAndAyah} = quranData;
   return (
     <div className="quran-wrapper">
-      <h1>Quran Page</h1>
+      <h1>Quran Verse</h1>
 
       <p className="arabic-text">{arText}</p>
       <p>{enText}</p>

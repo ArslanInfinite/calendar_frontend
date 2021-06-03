@@ -1,5 +1,5 @@
 import moment from "moment";
-import Modal from 'react-modal';
+import Modal from 'react-modal'; //Modal is a popup window 
 
 const customStyles = {
   content: {
@@ -13,19 +13,19 @@ const customStyles = {
   }
 };
 
-const ViewTask = ({ task, toggleModal, showViewTaskModal, toggleEditModal, handleDeleteTask }) => {
-  const { title, description, allDay, end, start } = task;
+const ViewTask = ({ currentTask, toggleViewModal, showViewTaskModal, toggleEditModal, handleDeleteTask }) => {
+  const { title, description, allDay, end, start } = currentTask;
 
   const handleEditTask = () => {
-    toggleEditModal(task);
+    toggleEditModal(currentTask);
   }
 
   return (<Modal
     isOpen={showViewTaskModal}
-    onRequestClose={toggleModal}
+    onRequestClose={toggleViewModal}
     style={customStyles}
-  >
-    <button onClick={toggleModal}>close</button>
+    >
+    <button onClick={toggleViewModal}>close</button>
     <h1>{title}</h1>
 
     <button onClick={handleEditTask}>Edit</button>

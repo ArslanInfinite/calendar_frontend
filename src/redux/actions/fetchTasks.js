@@ -1,5 +1,5 @@
 import { FETCH_TASKS, SET_ERROR } from '../reducers/types';
-
+//.then/.catch or async/await (with try/catch)
 export default function fetchTasks() {
   return async (dispatch) => {
     try {

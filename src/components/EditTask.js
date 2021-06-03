@@ -13,36 +13,50 @@ const customStyles = {
   }
 };
 
-const CreateTask = ({ state, toggleModal, handleUpdateTask, handleInputChange }) => {
+const CreateTask = ({ state, toggleEditModal, handleUpdateTask, handleInputChange }) => {
   const { title, description, allDay, start, end, showEditTaskModal } = state;
   return (<Modal
     isOpen={showEditTaskModal}
-    onRequestClose={toggleModal}
+    onRequestClose={toggleEditModal}
     style={customStyles}
   >
-    <button onClick={toggleModal}>close</button>
+    <button onClick={toggleEditModal}>close</button>
     <h1>Edit a Task</h1>
 
     <form onSubmit={handleUpdateTask}>
       <div className="form-group">
         <label>Title:</label>
-        <input required name="title" value={title} onChange={handleInputChange} /> 
+        <input required name="title" 
+        value={title} 
+        onChange={handleInputChange} /> 
       </div>
       <div className="form-group">
         <label>Description:</label>
-        <input required name="description" value={description} onChange={handleInputChange} />       
+        <input required name="description" 
+        value={description} 
+        onChange={handleInputChange} />       
         </div>
       <div className="form-group">
         <label>Start Date:</label>
-            <input min={moment().format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="start" value={start} onChange={handleInputChange} /> 
+          <input min={moment().format('YYYY-MM-DDTHH:mm')} 
+          required type="datetime-local" 
+          name="start" value={start} 
+          onChange={handleInputChange} /> 
       </div>
       < div className="form-group">
         <label>End Date:</label>
-          <input min={moment(start).format('YYYY-MM-DDTHH:mm')} required type="datetime-local" name="end" value={end} onChange={handleInputChange} /> 
+          <input min={moment(start).format('YYYY-MM-DDTHH:mm')} 
+          required type="datetime-local" 
+          name="end" 
+          value={end} 
+          onChange={handleInputChange} /> 
           </div>
           <div className="form-group">
             <label>All Day:</label>
-            <input type="checkbox" name="allDay" value={allDay} checked={allDay} onChange={handleInputChange} /> 
+            <input type="checkbox" 
+            name="allDay" 
+            checked={allDay} 
+            onChange={handleInputChange} /> 
             <br />
           </div>
       <button>Update</button>
